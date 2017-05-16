@@ -22,12 +22,13 @@ class OysterCard
   end
 
   def touch_in
-    raise "You have less than minimum £#{OysterCard::BALANCE_MIN} balance" if @balance < BALANCE_MIN
+    raise "You have less than minimum £#{BALANCE_MIN} balance" if @balance < BALANCE_MIN
     @in_journey = true
   end
 
   def touch_out
     @in_journey = false
+    @balance -= BALANCE_MIN
   end
 
   def in_journey?

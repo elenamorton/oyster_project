@@ -39,8 +39,8 @@ describe OysterCard do
     expect(oystercard.touch_in).to eq true
   end
 
-  it "checks if it is touched out" do
-    expect(oystercard.touch_out).to eq false
+  it "deducts fare at touch out" do
+    expect { oystercard.touch_out }.to change{oystercard.balance}.by(-OysterCard::BALANCE_MIN)
   end
 
   it "checks if it is in journey" do
