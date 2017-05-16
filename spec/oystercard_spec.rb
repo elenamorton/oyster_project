@@ -2,7 +2,7 @@ require 'oystercard'
 
 describe OysterCard do
    subject(:oystercard) { described_class.new }
-
+   let(:journey) { double(:journey, finish: true, fare: OysterCard::BALANCE_MIN) }
 
    it { expect(oystercard).to respond_to :top_up }
    it { expect(oystercard).to respond_to :touch_in}
@@ -45,22 +45,14 @@ describe OysterCard do
   end
 
   it "checks if it is not in journey" do
-    oystercard.touch_in(:entry_station)
-    oystercard.touch_out(:exit_station)
     expect(oystercard.in_journey?).to eq false
   end
 
-  it "expects the card to remember the entry station after touch in" do
-    oystercard.touch_in(:entry_station)
-    expect(oystercard.entry_station).to eq :entry_station
-  end
-
   it "expects card to store a journey" do
-    entry_station =  double(:station)
-    exit_station =  double(:station)
-    oystercard.touch_in(entry_station)
-    oystercard.touch_out(exit_station)
-    expect(oystercard.list_of_journeys.last).to eq ({entry_station: entry_station, exit_station: exit_station})
+
+    oystercard.instance_variable_set('@journey', journey)
+    oystercard.touch_out(:exit_station)
+    expect(oystercard.list_of_journeys.last).to eq journey
   end
 
   it "expects crad to have an empty journeys list at start" do
