@@ -22,7 +22,7 @@ describe Journey do
     expect(journey).not_to be_complete
   end
 
-  it "returns itself wne exiting a journey" do
+  it "returns itself one exiting a journey" do
     expect(journey.finish(station)).to eq(subject)
   end
 

@@ -1,4 +1,4 @@
-
+require_relative 'station'
 
 class Journey
 
@@ -24,12 +24,14 @@ class Journey
     self
   end
 
-  def complete?
-    @entry_station && @exit_station
-  end
-
   def started?
     @entry_station != nil
+  end
+
+private
+
+  def complete?
+    @entry_station && @exit_station
   end
 
 end

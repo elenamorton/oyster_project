@@ -1,5 +1,6 @@
 require_relative 'station'
 require_relative 'journey'
+require_relative 'journeylog'
 
 class OysterCard
   attr_reader :balance, :entry_station, :list_of_journeys
@@ -36,6 +37,8 @@ class OysterCard
     @list_of_journeys << @journey
     @journey = Journey.new
   end
+
+private
 
   def in_journey?
     @journey.started?
