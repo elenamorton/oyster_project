@@ -19,19 +19,15 @@ class Journey
     0
   end
 
-  def finish(station)
-    @exit_station = station
-    self
-  end
-
-  def started?
-    @entry_station != nil
-  end
 
 private
 
   def complete?
     @entry_station && @exit_station
+  end
+
+  def started?
+    @entry_station != nil
   end
 
 end
